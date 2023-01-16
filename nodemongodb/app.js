@@ -13,6 +13,22 @@ async function connect() {
     await mongoose.connect(
       "mongodb+srv://codestepbystep:codestepbystep@cluster0.hp6rxd3.mongodb.net/?retryWrites=true&w=majority"
     );
+    const Schema = mongoose.Schema;
+    const productSchema = new Schema({
+      name: String,
+      price: Number,
+      path: String,
+    });
+
+    const Product = mongoose.model(products, productSchema);
+    let data = new Product({
+      name: "Alvine",
+      price: 200,
+      path: "directory",
+    });
+
+    const result = await data.save();
+    console.log(`Producs are added to database ${result}`);
     console.log("Connected to Mongo db south Africa");
   } catch (error) {
     console.error(error);
